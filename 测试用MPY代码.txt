@@ -1,0 +1,172 @@
+from udrobot.drivers.motor import Car2D
+a =  Car2D()
+actions = [a.left, a.right, a.forword, a.back()]
+import time
+while True:
+    for i in range(4):
+        actions[i]()
+        time.sleep(1)
+
+
+from udrobot.extend_board.iot import AIPlayer;aiplayer = AIPlayer('192.168.28.10');
+udpi_wifi.connect('Underdog_502', 'underdog123')
+aiplayer.useSD=1
+aiplayer.TTS('haha')
+
+from drivers.test import *
+a = TestSuit()
+
+while True:
+    try:
+        time.sleep_ms(50)
+        data = a.mode()
+        print('data=>')
+        print(data)
+    except:
+        pass
+    
+from drivers.test import *
+a = TestSuit()
+data = a.mode()
+print('data=>')
+print(data)
+
+
+# 指纹模块
+from drivers.as608 import *
+from machine import UART
+a = UART(2,57600)
+a = UART(2,57600)
+a.write(As608.FPM10A_Pack_Head)
+a.write(As608.FPM10A_Get_Device)
+a.read()
+
+from drivers.as608 import *
+from machine import UART
+a = UART(2,57600)
+a.write(As608.FPM10A_Pack_Head)
+a.write(As608.FPM10A_Get_Device)
+a.read()
+
+from udrobot.sensor.fingerprint import Fingerprint
+fingerprintModule = Fingerprint()
+
+
+# 内存测试
+from udrobot.sensor.camera.camera import Camera
+myCamara = Camera(udpi_i2c)
+myCamara._write('face|get');myCamara._read()
+
+
+
+num = ""
+import gc, _thread
+def foo():
+  while True:
+    time.sleep_ms(500)
+    print(gc.mem_free())
+    if gc.mem_free() < 10000:
+        gc.collect()
+
+_thread.start_new_thread(foo,())
+a = machine.Pin(0)
+while True:
+  print(str(123))
+  #print(int('123'))
+  #time.ticks_ms()
+  #a.value()
+  #gc.mem_free()
+  #print(1+1)
+  #pass
+  print(udpi_button.button(0))
+  gc.collect()
+
+def foo():
+	st = time.ticks_ms()
+	st2 = time.ticks_ms()
+	st3 = time.ticks_ms()
+	while True:
+		if time.ticks_ms() - st3 > 2000:
+			myCamara.SwitchMode('obj','start',None)
+			st3 = time.ticks_ms()
+		if time.ticks_ms() - st > 4000:
+			myCamara.SwitchMode('color','start',None)
+			st = time.ticks_ms()
+		if time.ticks_ms() - st2 > 50:
+			print(myCamara._read())
+			st2 = time.ticks_ms()
+		time.sleep_ms(30)
+
+myCamara.load_selfobject('test')
+import _thread,gc
+gc.mem_free()
+def foo():
+  while True:
+    print(udpi_button.voltage)
+    print(gc.mem_free())
+    bytes(1000)
+    gc.collect()
+_thread.start_new_thread(foo,())
+
+
+a = 100
+while True:
+  time.sleep_ms(200)
+  print(myCamera.GetSelfLearningResult())
+  print(a)
+
+
+a = 100
+def foo():
+    global a
+    while True:
+        a = time.ticks_us()
+        time.sleep_ms(10)
+import _thread
+_thread.start_new_thread(foo,())
+
+
+from kcamera_color import *
+a = ColorUtils()
+while True:
+  img = sensor.snapshot()
+  a.CheckColor(img)
+  lcd.display(img)
+
+from kcamera_route import *
+
+def get():
+  myCamera.i2c.writeto(77, 'face|get')
+  myCamera.i2c.writeto(77,b'\x03')
+  myCamera.i2c.readfrom(77, 64)
+
+
+320/240 = 224/x
+
+
+x = 224 / 320 * 240 =168
+
+(0, 183, 255)
+auto_gain (110, 111, 163)
++30db (96,140,134)
++60db (106,146,145)
+-30db ()
+
+from kcamera_color import *
+sensor.reset()
+sensor.set_framesize(sensor.QVGA)
+sensor.set_pixformat(sensor.RGB565)
+sensor.set_hmirror(0)
+sensor.set_vflip(1)
+sensor.set_auto_gain(0,0)
+sensor.set_contrast(0)
+sensor.set_saturation(2)
+sensor.run(1)
+
+c = ColorUtils()
+while True:
+  img = sensor.snapshot()
+  lab = c.GetLAB(img)
+  print('lab: %s' % (str(lab)))
+  print('rgb: %s' % (str(c.GetRGB(img))))
+  lcd.display(img)
